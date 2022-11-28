@@ -2,3 +2,15 @@ header {
     color: white;
     background-color: rgb(0, 0, 160);
 }
+.card-header {
+    color: white;
+    background-color: blue;
+}
+#cardId {
+   border-radius: 5px;
+   border: 2px solid black; 
+}
+h2 {
+    margin: 20px 0px;
+    
+}

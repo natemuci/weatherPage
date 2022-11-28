@@ -1,6 +1,7 @@
 var searchBtn = $("#searchBtn");
 var saveSearch = $("#searchInput");
-var divEl = $("#fivedayforecast");
+var fiveDay = $("#fiveDay");
+var oneDay = $("#oneDay")
 var colEl = $(".col")
 var divEl = $("#divEl")
 var forecast = $("#forecast")
@@ -42,23 +43,29 @@ function retrieveLocation() {
             currentWindSpeed = response.list[0].wind.speed;
         
             console.log(currentWeatherIcon);
-            var cardClass = $("<div>").attr("style")
-            var newCity = $("<h3>").text(cityName)
-            currentEl.append(newCity);
+            var colClass = $("<div>").attr("class", "col")
+            oneDay.append(colClass)
+            var cardClass = $("<div>").attr("class", "card").attr("style", "width: 25rem;").attr("id", "cardId")
+            colClass.append(cardClass)
+             var newCity = $("<h3>").attr("class", "card-header").text(cityName)
+            cardClass.append(newCity);
+            var cBody = $("<div>").attr("class", "card-body")
+            cardClass.append(cBody)
+           
             
             var iconP = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png");
-            currentEl.append(iconP)
+            cBody.append(iconP)
             var tempP1 = $("<p>").text("Temperature: " + currentTemp + "F");
-            currentEl.append(tempP1)
+            cBody.append(tempP1)
             var humP = $("<p>").text("Humidity: " + currentHumidity + "%");
-            currentEl.append(humP)
+            cBody.append(humP)
             var curRain = $("<p>").text("Chance of Rain: " + currentChanceRain + "%");
-            currentEl.append(curRain)
+            cBody.append(curRain)
             var windP = $("<p>").text("Wind Speed: " + currentWindSpeed + "MPH");
-            currentEl.append(windP);
+            cBody.append(windP);
 
             var newH2 = $("<h2>").text("5-Day Forecast: ");
-            colEl.append(newH2)
+            fiveDay.append(newH2)
 
             for (var i = 0; i < 40; i += 8){
                 forecastDate[i] = response.list[i].dt_txt;
@@ -69,12 +76,13 @@ function retrieveLocation() {
                 chanceRain[i] = Math.floor(response.list[i].pop);
                 
                 
-                var cardDiv = $("<div>").attr("class", "card").attr("style", "width: 18rem;").attr("class", "col")
+                var cardDiv = $("<div>").attr("class", "card").attr("style", "width: 20rem;")
                 forecast.append(cardDiv)
+                var newH3 = $("<h3>").attr("class", "card-header").text(moment(forecastDate[i]).format("dddd   " + "M" + "/" + "D"));
+                cardDiv.append(newH3);
                 var cardBodyDiv =$("<div>").attr("class", "card-body")
                cardDiv.append(cardBodyDiv)
-                var newH3 = $("<h3>").attr("class", "card-title").text(moment(forecastDate[i]).format("dddd   " + "L"));
-                cardBodyDiv.append(newH3);
+                
                 var newIcon = $("<img>").attr("class", "card-text").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon[i] + "@2x.png");
                 cardBodyDiv.append(newIcon);
                 var tempP = $("<p>").attr("class", "card-text").text("Temperature: " + temp[i] + "F");
