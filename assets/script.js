@@ -1,5 +1,5 @@
 var searchBtn = $("#searchBtn");
-var saveSearch = $("#searchInput");
+var searchInput = $("#searchInput");
 var fiveDay = $("#fiveDay");
 var oneDay = $("#oneDay")
 var colEl = $(".col")
@@ -19,15 +19,17 @@ var rainVol = {};
 var currentDate = moment().format('L');
 
 searchBtn.on("click",function(){
-    userInput = saveSearch.val();
-    localStorage.setItem("location", JSON.stringify(userInput.toLowerCase()));
-
+    
+    // userInput = saveSearch.val();
+    //localStorage.setItem("location", JSON.stringify(userInput.toLowerCase()));
     retrieveLocation();
+    saveCitySearch();
 })
 
-function retrieveLocation() {
-    var location = JSON.parse(localStorage.getItem("location"));
+function retrieveLocation(l) {
     function currentWeather(){
+        var location = searchInput.val();
+        
         var weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=imperial&appid=f5ca5829ecc4bf04f1d13831ce88f110";
         
         fetch(weatherUrl)
@@ -99,4 +101,9 @@ function retrieveLocation() {
         })
     }
     currentWeather();
+    
 }
+function saveCitySearch(location){
+
+    console.log(location);
+};
