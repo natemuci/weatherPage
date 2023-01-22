@@ -6,6 +6,9 @@ header {
     color: white;
     background-color: blue;
 }
+.container{
+    width: 100%;
+}
 #cardId {
    border-radius: 5px;
    border: 2px solid black; 
